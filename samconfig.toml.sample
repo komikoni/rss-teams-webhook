@@ -1,0 +1,15 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "rss-teams-webhook"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-*"
+s3_prefix = "rss-teams-webhook"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = """
+    TeamsWebhookUrl='https://outlook.office.com/webhook/**/IncomingWebhook/**'                 \
+    RssList='[ \
+        { "Url": "https://aws.amazon.com/jp/about-aws/whats-new/recent/feed/" ,"themeColor": "FF9900", "translation": false} \
+        ]'   \
+    """

@@ -23,6 +23,10 @@ Parameters:
   RssList:
     Description: (Require) RssList
     Type: String
+  ExecutionIntervalHour:
+    Description: (Require) ExecutionIntervalHour
+    Type: Number
+    Default: 1
 
 
 # Resources declares the AWS resources that you want to include in the stack
@@ -43,11 +47,12 @@ Resources:
         CloudWatchEvent:
           Type: Schedule
           Properties:
-            Schedule: rate(1 hour)
+            Schedule: !Sub rate(${ExecutionIntervalHour} hour)
       Environment:
         Variables:
           TEAMS_WEBHOOK_URL: !Sub ${TeamsWebhookUrl}
           TEAMS_WEBHOOK_LIMIT: 5 # https://docs.microsoft.com/ja-jp/microsoftteams/platform/bots/how-to/rate-limit#per-bot-per-thread-limit
           RSS_LIST: !Sub ${RssList}
+          EXECUTION_INTERVAL_HOUR: !Sub ${ExecutionIntervalHour}
       MemorySize: 128
       Timeout: 100

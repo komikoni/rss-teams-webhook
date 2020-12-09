@@ -11,9 +11,11 @@ dayjs.locale('ja')
 const utc = require('dayjs/plugin/utc'); // dependent on utc plugin
 const timezone = require('dayjs/plugin/timezone');
 const localizedFormat = require('dayjs/plugin/localizedFormat');
+const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
+dayjs.extend(isSameOrAfter);
 
 exports.handler = async (event, context, callback) => {
     // console.info(JSON.stringify(event));
@@ -21,13 +23,20 @@ exports.handler = async (event, context, callback) => {
     const teamsWebHookUrl = process.env.TEAMS_WEBHOOK_URL;
     const webhook = new IncomingWebhook(teamsWebHookUrl);
     const teamsWebHookLimit = Number(process.env.TEAMS_WEBHOOK_LIMIT);
+    const executionIntervalHour = Number(process.env.EXECUTION_INTERVAL_HOUR);
     const limit = pLimit(teamsWebHookLimit);
 
     const rssList = JSON.parse(process.env.RSS_LIST);
     await Promise.all(rssList.map(async rss => {
         const feed = await parser.parseURL(rss.Url);
         console.log(JSON.stringify(feed));
-        await Promise.all(feed.items.map(async item => {
+        await Promise.all(feed.items.filter(item => {
+            const targetTime = dayjs(event.time).subtract(executionIntervalHour, 'hour');
+            // console.log(`targetTime=${targetTime.format()}`);
+            // console.log(`itemTime=${dayjs(item.isoDate).format()}`);
+            // console.log(`judge=${dayjs(item.isoDate).isSameOrAfter(targetTime)}`);
+            return dayjs(item.isoDate).isSameOrAfter(targetTime);
+        }).map(async item => {
             const displayTime = dayjs(item.isoDate).tz("Asia/Tokyo").format('llll');
             const sendBody = {
                 "@type": "MessageCard",
@@ -44,7 +53,7 @@ exports.handler = async (event, context, callback) => {
                     }
                 ]
             };
-            await limit(() => webhook.send(JSON.stringify(sendBody)));
+            return await limit(() => webhook.send(JSON.stringify(sendBody)));
         }));
     }));
     callback(null, 'Success');

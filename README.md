@@ -1,5 +1,26 @@
 # rss-teams-webhook
 
+RSSをTeamsのチャネルに定期的に投稿するツールです。
+定期実行に、Amazon CloudWatch Event及びAWS Lambda(Node.js) を利用します。
+Teamsへの投稿には、In-Comming-Webhook コネクタ を利用します。
+
+※Teamsには、RSSコネクタが用意されており、通常は本ツールを利用する必要はありません。
+　本ツールは、RSSコネクタが何らかの事情で使用できない場合に向けたツールとなります。
+## 事前準備
+
+* AWS SAM CLI - [Install the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
+* Node.js - [Install Node.js 12](https://nodejs.org/en/), including the npm package management tool.
+
+```ps
+sam build
+sam deploy --guided
+```
+
+※ `samconfig.toml.sample` を参考に、 `samconfig.toml` を上書きしてください。
+
+
+## 以下、サンプルREADME
+
 This project contains source code and supporting files for a serverless application that you can deploy with the AWS Serverless Application Model (AWS SAM) command line interface (CLI). It includes the following files and folders:
 
 - `src` - Code for the application's Lambda function.
