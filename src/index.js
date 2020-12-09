@@ -46,6 +46,7 @@ exports.handler = async (event, context, callback) => {
 
 const generateSendBody = async (item, rss) => {
     const displayTime = dayjs(item.isoDate).tz("Asia/Tokyo").format('llll');
+    // Reference: https://docs.microsoft.com/ja-jp/outlook/actionable-messages/message-card-reference
     const sendBody = {
         "@type": "MessageCard",
         "@context": "https://schema.org/extensions",
@@ -79,13 +80,17 @@ const generateSendBody = async (item, rss) => {
             SourceLanguageCode: 'en',
             TargetLanguageCode: 'ja',
         };
-        const jaTitle = await Translate.translateText(titleParams).promise();
         const contentParams = {
             Text: item.contentSnippet,
             SourceLanguageCode: 'en',
             TargetLanguageCode: 'ja',
         };
-        const jaContent = await Translate.translateText(contentParams).promise();
+        const translateErrHandle = err => {
+            console.log(JSON.stringify(err));
+            return "Translate error";
+        };
+        const jaTitle = await Translate.translateText(titleParams).promise().catch(translateErrHandle);
+        const jaContent = await Translate.translateText(contentParams).promise().catch(translateErrHandle);
 
         sendBody.sections.push({
             "activityTitle": jaTitle.TranslatedText,
