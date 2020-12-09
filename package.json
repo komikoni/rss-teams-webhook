@@ -1,0 +1,18 @@
+{
+    "name": "replaced-by-user-input",
+    "description": "replaced-by-user-input",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "dayjs": "^1.9.7",
+        "ms-teams-webhook": "^1.0.3",
+        "p-limit": "^3.1.0",
+        "rss-parser": "^3.9.0"
+    },
+    "devDependencies": {
+        "jest": "^24.7.1"
+    },
+    "scripts": {
+        "test": "jest"
+    }
+}

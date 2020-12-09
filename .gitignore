@@ -1,0 +1,5 @@
+node_modules
+package-lock.json
+.aws-sam/
+samconfig.toml
+template-export.yaml
