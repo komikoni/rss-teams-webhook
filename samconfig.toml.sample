@@ -10,6 +10,30 @@ capabilities = "CAPABILITY_IAM"
 parameter_overrides = """
     TeamsWebhookUrl='https://outlook.office.com/webhook/**/IncomingWebhook/**'                 \
     RssList='[ \
-        { "Url": "https://aws.amazon.com/jp/about-aws/whats-new/recent/feed/" ,"themeColor": "FF9900", "translation": false} \
+        { "title":"AWS News Blog", "Url":"https://aws.amazon.com/blogs/aws/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Architecture Blog", "Url":"https://aws.amazon.com/blogs/architecture/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Partner Network (APN) Blog", "Url":"https://aws.amazon.com/blogs/apn/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Marketplace", "Url":"https://aws.amazon.com/blogs/awsmarketplace/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Big Data Blog", "Url":"https://aws.amazon.com/blogs/big-data/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Compute Blog", "Url":"https://aws.amazon.com/blogs/compute/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Database Blog", "Url":"https://aws.amazon.com/blogs/database/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Desktop and Application Streaming Blog", "Url":"https://aws.amazon.com/blogs/desktop-and-application-streaming/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Developer Blog", "Url":"https://aws.amazon.com/blogs/developer/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS DevOps Blog", "Url":"https://aws.amazon.com/blogs/devops/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Cloud Enterprise Strategy Blog", "Url":"https://aws.amazon.com/blogs/enterprise-strategy/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Game Tech Blog", "Url":"https://aws.amazon.com/blogs/gametech/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS The Internet of Things Blog", "Url":"https://aws.amazon.com/blogs/iot/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Machine Learning Blog", "Url":"https://aws.amazon.com/blogs/machine-learning/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Management Tools Blog", "Url":"https://aws.amazon.com/blogs/mt/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Media Blog", "Url":"https://aws.amazon.com/blogs/media/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Messaging and Targeting Blog", "Url":"https://aws.amazon.com/blogs/messaging-and-targeting/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Mobile Blog", "Url":"https://aws.amazon.com/blogs/mobile/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Networking and Content Delivery", "Url":"https://aws.amazon.com/blogs/networking-and-content-delivery/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Open Source Blog", "Url":"https://aws.amazon.com/blogs/opensource/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Government, Education, and Nonprofits Blog", "Url":"https://aws.amazon.com/blogs/publicsector/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS for SAP", "Url":"https://aws.amazon.com/blogs/awsforsap/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Security Blog", "Url":"https://aws.amazon.com/blogs/security/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Startups Blog", "Url":"https://aws.amazon.com/blogs/startups/feed" ,"themeColor": "FF9900", "translation": true}, \
+        { "title":"AWS Japan Blog", "Url":"https://aws.amazon.com/jp/blogs/news/feed" ,"themeColor": "FF9900", "translation": false} \
         ]'   \
     """

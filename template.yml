@@ -43,6 +43,8 @@ Resources:
       # This property associates this Lambda function with a scheduled CloudWatch Event. For all available properties, see
       # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#schedule
       # This example runs every hour.
+      Policies:
+        - TranslateReadOnly
       Events:
         CloudWatchEvent:
           Type: Schedule
@@ -54,5 +56,5 @@ Resources:
           TEAMS_WEBHOOK_LIMIT: 5 # https://docs.microsoft.com/ja-jp/microsoftteams/platform/bots/how-to/rate-limit#per-bot-per-thread-limit
           RSS_LIST: !Sub ${RssList}
           EXECUTION_INTERVAL_HOUR: !Sub ${ExecutionIntervalHour}
-      MemorySize: 128
-      Timeout: 100
+      MemorySize: 512
+      Timeout: 300
