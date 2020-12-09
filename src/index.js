@@ -27,16 +27,20 @@ exports.handler = async (event, context, callback) => {
     const webhook = new IncomingWebhook(teamsWebHookUrl);
     const teamsWebHookLimit = Number(process.env.TEAMS_WEBHOOK_LIMIT);
     const executionIntervalHour = Number(process.env.EXECUTION_INTERVAL_HOUR);
+    const targetTime = dayjs(event.time).subtract(executionIntervalHour, 'hour');
     const webHookLimit = pLimit(teamsWebHookLimit);
 
     const rssList = JSON.parse(process.env.RSS_LIST);
-    await Promise.all(rssList.map(async rss => {
+    // console.log(`rss count =${rssList.length}`);
+    await Promise.all(rssList.map(async (rss, i, arr) => {
         const feed = await parser.parseURL(rss.Url);
-        // console.log(JSON.stringify(feed));
+        // console.log(JSON.stringify(feed.title));
+        // console.log(`rss items count =${arr.length}`);
         await Promise.all(feed.items.filter(item => {
-            const targetTime = dayjs(event.time).subtract(executionIntervalHour, 'hour');
+            // console.log(`targetTime=${targetTime.format()} , itemTime=${dayjs(item.isoDate).format()}`);
             return dayjs(item.isoDate).isSameOrAfter(targetTime);
         }).map(async item => {
+            console.log(`send item=${JSON.stringify(item)}`);
             const sendBody = await generateSendBody(item, rss);
             return await webHookLimit(() => webhook.send(JSON.stringify(sendBody)));
         }));
