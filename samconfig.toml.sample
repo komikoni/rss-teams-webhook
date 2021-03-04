@@ -8,7 +8,7 @@ s3_prefix = "rss-teams-webhook"
 region = "ap-northeast-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = """
-    TeamsWebhookUrl='https://outlook.office.com/webhook/**/IncomingWebhook/**'                 \
+    TeamsWebhookUrl='https://**.webhook.office.com/webhookb2/**/IncomingWebhook/**'                 \
     RssList='[ \
         { "title":"AWS News Blog", "Url":"https://aws.amazon.com/blogs/aws/feed" ,"themeColor": "FF9900", "translation": true}, \
         { "title":"AWS Architecture Blog", "Url":"https://aws.amazon.com/blogs/architecture/feed" ,"themeColor": "FF9900", "translation": true}, \
